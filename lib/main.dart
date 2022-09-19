@@ -58,5 +58,21 @@ class BreadCrumb {
 
 class BreadCrumbProvider with ChangeNotifier {
   final List<BreadCrumb> _items = [];
+
+  //
   UnmodifiableListView<BreadCrumb> get item => UnmodifiableListView(_items);
+
+  // add a new item
+  void add(BreadCrumb item) {
+    for (final item in _items) {
+      item.activate();
+    }
+    _items.add(item);
+    notifyListeners();
+  }
+  // rest  items
+  void reset() {
+    _items.clear();
+    notifyListeners();
+  }
 }
